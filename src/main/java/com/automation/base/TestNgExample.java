@@ -22,4 +22,10 @@ public class TestNgExample {
 		System.out.println("Test Ng3");
 	}
 	
+	@Test
+	public void test4() {
+		Assert.assertTrue(true);
+		System.out.println("Test Ng4");
+	}
+	
 }
