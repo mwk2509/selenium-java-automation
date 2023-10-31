@@ -59,5 +59,7 @@ public class BaseTest {
 		
 		//driver.close();
 	}
+	
+	public void test() {}
 
 }
