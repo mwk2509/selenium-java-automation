@@ -1,8 +1,6 @@
 package com.automation.base;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.List;
@@ -11,17 +9,40 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
+	public static WebDriver driver;
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
+	@Parameters({"browserType"})
+	@BeforeMethod
+	public void seup(String browserType) throws Exception {
+		
+		try {
+			if (driver != null) {
+				if ("chrome".equals(browserType)) {
+					WebDriverManager.chromedriver().setup();
+					driver = new ChromeDriver();
+				} else if ("ie".equals(browserType)) {
+					WebDriverManager.iedriver().setup();
+					driver = new InternetExplorerDriver();
+				} else if ("edge".equals(browserType)) {
+					WebDriverManager.edgedriver().setup();
+					driver = new EdgeDriver();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		driver.get("https://demoqa.com/links");
-		
 		String elementHeaderText = driver.findElement(By.xpath("//div[@class='main-header']")).getText();
 		
 		System.out.println(driver.getTitle());
