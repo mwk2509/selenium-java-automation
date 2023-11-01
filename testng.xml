@@ -2,9 +2,9 @@
 
 <suite name="Suite1" verbose="1">
 	<test name="Nopackage">
-	<parameter name="name" value="Metasebiya"></parameter>
+	<parameter name="browserType" value="chrome"></parameter>
 		<classes>
-			<class name="com.automation.base.TestCasePriority" />
+			<class name="com.automation.tests.TextBoxTest" />
 		</classes>
 	</test>
 </suite>
