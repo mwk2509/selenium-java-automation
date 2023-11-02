@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import com.automation.base.BaseTest;
 
 public class ActionEngine extends BaseTest{
@@ -44,6 +46,42 @@ public class ActionEngine extends BaseTest{
 			e.printStackTrace();
 		} finally {
 
+		}
+	}
+	
+	public void selectByIndex(By locator, String locatorName, int index) throws Exception {
+		try {
+			WebElement we = getWebElement(locator);
+			Select dropDown = new Select(we);
+			dropDown.selectByIndex(index);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+	}
+	
+	public void selectByValue(By locator, String locatorName, String dropDownValue) throws Exception {
+		try {
+			WebElement we = getWebElement(locator);
+			Select dropDown = new Select(we);
+			dropDown.deselectByValue(dropDownValue);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+	}
+	
+	public void selectByVisibleText(By locator, String locatorName, String dropDownVisibleText) throws Exception {
+		try {
+			WebElement we = getWebElement(locator);
+			Select dropDown = new Select(we);
+			dropDown.deselectByVisibleText(dropDownVisibleText);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			
 		}
 	}
 	
