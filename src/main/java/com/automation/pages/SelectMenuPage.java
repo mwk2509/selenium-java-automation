@@ -11,5 +11,10 @@ public class SelectMenuPage extends ActionEngine{
 	public void selectByIndex() throws Exception{
 		selectByIndex(oldStyleSelectMenu, "Old Style Select Menu", 2);
 	}
-
+	public void selectByValue() throws Exception{
+		selectByValue(oldStyleSelectMenu, "Old Style Select Menu", "7");
+}
+	public void selectByVisibleText() throws Exception{
+		selectByVisibleText(oldStyleSelectMenu, "Old Style Select Menu", "Purple");
+}
 }
