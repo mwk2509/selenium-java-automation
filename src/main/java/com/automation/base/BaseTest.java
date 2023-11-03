@@ -20,7 +20,7 @@ public class BaseTest {
 	@BeforeMethod
 	public void seup(String browserType) throws Exception {
 		try {
-			if (driver == null) {
+			//if (driver == null) {
 				if ("chrome".equals(browserType)) {
 					WebDriverManager.chromedriver().setup();
 					driver = new ChromeDriver();
@@ -31,7 +31,7 @@ public class BaseTest {
 					WebDriverManager.edgedriver().setup();
 					driver = new EdgeDriver();
 				}
-			}
+			//}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

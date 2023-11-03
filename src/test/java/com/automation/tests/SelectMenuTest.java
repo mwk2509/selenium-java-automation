@@ -12,5 +12,9 @@ public class SelectMenuTest extends ActionEngine {
 	public void selectByIndex() throws Exception {
 		selectMenuPage.selectByIndex();
 	}
-
+	
+	@Test
+	public void selectByValue() throws Exception {
+		selectMenuPage.selectByValue();
+}
 }
