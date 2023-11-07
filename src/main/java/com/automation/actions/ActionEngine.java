@@ -4,13 +4,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Duration;
 import java.util.List;
+import java.util.function.Function;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automation.base.BaseTest;
@@ -123,7 +128,7 @@ public class ActionEngine extends BaseTest{
 		}
 	}
 	
-	public void scrollPage(int pixelValue) {
+	public void scrollPage(int pixelValue) throws Exception {
 		
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0, "+pixelValue+")", "");
@@ -136,6 +141,20 @@ public class ActionEngine extends BaseTest{
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("arguments[0].scrollIntoView();", we);
 		
+	}
+	
+	public void waitForElementToBeClickable(By locator, long waitTime) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitTime));
+		wait.until(ExpectedConditions.elementToBeClickable(locator));
+	}
+	
+	public void fluentWait(final By locator, long waitTime, long pollTime) throws Exception{
+		Wait<WebDriver> wait = new FluentWait(driver).withTimeout(Duration.ofSeconds(waitTime)).pollingEvery(Duration.ofSeconds(pollTime)).ignoring(WebDriverException.class);
+		wait.until(new Function<WebDriver, WebElement>(){
+			public WebElement apply(WebDriver driver ) {
+			return driver.findElement(locator);
+			}
+		});
 	}
 	
 }
