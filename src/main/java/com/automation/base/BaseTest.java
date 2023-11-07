@@ -8,6 +8,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
+
+import com.automation.utilities.LoadProperties;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest {
@@ -17,7 +20,7 @@ public class BaseTest {
 	@BeforeMethod
 	public void seup(String browserType) throws Exception {
 		try {
-			if (driver == null) {
+			//if (driver == null) {
 				if ("chrome".equals(browserType)) {
 					WebDriverManager.chromedriver().setup();
 					driver = new ChromeDriver();
@@ -28,14 +31,14 @@ public class BaseTest {
 					WebDriverManager.edgedriver().setup();
 					driver = new EdgeDriver();
 				}
-			}
+			//}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		driver.get("https://demoqa.com/text-box");
+		driver.get(LoadProperties.getData("url"));
 
 	}
 	
