@@ -12,5 +12,9 @@ public class AlertsPage extends ActionEngine{
 		System.out.println("I'm in AlertsPage.acceptWebAlert()");
 		acceptAlert();
 	} 
-
+	public void dismissWebAlert() throws Exception{
+		click(alertButton, "Click Button to see alert");
+		System.out.println("I'm in AlertsPage.dismissWebAlert()");
+		dismissAlert();
+}
 }
