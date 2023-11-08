@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automation.base.BaseTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class ActionEngine extends BaseTest{
 
@@ -28,18 +29,24 @@ public class ActionEngine extends BaseTest{
 	}
 	
 	public void click(By locator, String locatorName) throws Exception {
-		
+		boolean flag = false;
 		try {
 			WebElement we = getWebElement(locator);
 			if (we.isDisplayed() && we.isEnabled()) {
 				we.click();
+				flag =  true;
 			} else {
 				System.out.println("Requested element is not available on the web page!!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			flag = false;
 		} finally {
-
+			if(flag) {
+				extentTest.log(LogStatus.PASS, "Succefully clicked on "+locatorName);
+			}else {
+				extentTest.log(LogStatus.FAIL, "Failed to click on "+locatorName);
+			}
 		}
 		
 	}
@@ -97,20 +104,43 @@ public class ActionEngine extends BaseTest{
 	}
 	
 	public void acceptAlert() throws Exception{
+		boolean flag = false;
 		try {
 			WebDriverWait wdw = new WebDriverWait(driver, Duration.ofSeconds(5));
 			Alert alert = wdw.until(ExpectedConditions.alertIsPresent());
 			alert.accept();
+			flag = true;
 			System.out.println("Clicked on Alert OK button");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			
+			if(flag) {
+				extentTest.log(LogStatus.PASS, "Succefully clicked on OK button ");
+			}else {
+				extentTest.log(LogStatus.FAIL, "Failed to click on OK button");
+			}
 		}
 	}
 	
-	
-	
+	public void dismissAlert() throws Exception{
+		boolean flag = false;
+		try {
+			WebDriverWait wdw = new WebDriverWait(driver, Duration.ofSeconds(5));
+			Alert alert = wdw.until(ExpectedConditions.alertIsPresent());
+			alert.dismiss();
+			flag = true;
+			System.out.println("Clicked on Alert Cancel button");
+		}catch(Exception e) {
+			e.printStackTrace();
+			flag= false;
+		}finally {
+			if(flag) {
+				extentTest.log(LogStatus.PASS, "Succefully clicked on Cancel/Dismiss button ");
+			}else {
+				extentTest.log(LogStatus.FAIL, "Failed to click on Cancel/Dismiss button");
+			}
+		}
+	}
 	public void handleBrokenLinks() throws Exception {
 		List<WebElement> links = driver.findElements(By.tagName("a"));
 		for(WebElement we : links) {
