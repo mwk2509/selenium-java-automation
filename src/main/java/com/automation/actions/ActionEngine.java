@@ -1,14 +1,20 @@
 package com.automation.actions;
 
+import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -45,7 +51,7 @@ public class ActionEngine extends BaseTest{
 			if(flag) {
 				extentTest.log(LogStatus.PASS, "Succefully clicked on "+locatorName);
 			}else {
-				extentTest.log(LogStatus.FAIL, "Failed to click on "+locatorName);
+				extentTest.log(LogStatus.FAIL, "Failed to click on "+locatorName+extentTest.addScreenCapture(getScreenshot(locatorName)));
 			}
 		}
 		
@@ -117,7 +123,7 @@ public class ActionEngine extends BaseTest{
 			if(flag) {
 				extentTest.log(LogStatus.PASS, "Succefully clicked on OK button ");
 			}else {
-				extentTest.log(LogStatus.FAIL, "Failed to click on OK button");
+				extentTest.log(LogStatus.FAIL, "Failed to click on OK button"+extentTest.addScreenCapture(getScreenshot("acceptAlert")));
 			}
 		}
 	}
@@ -185,6 +191,26 @@ public class ActionEngine extends BaseTest{
 			return driver.findElement(locator);
 			}
 		});
+	}
+	
+	public static String getScreenshot(String locatorName) throws Exception{
+		String screenShotLocation = "";
+		try {
+			String projectPath = System.getProperty("user.dir");
+			String dateFormat = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+			screenShotLocation = projectPath+File.separator+"FailedScreenShots"+File.separator+locatorName+dateFormat+".png";
+			File destination = new File(screenShotLocation);
+			
+			TakesScreenshot ts = (TakesScreenshot)driver;
+			File source = ts.getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(source, destination);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return screenShotLocation;
+		
 	}
 	
 }

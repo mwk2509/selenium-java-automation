@@ -8,12 +8,12 @@ public class AlertsPage extends ActionEngine{
 	private By alertButton = By.id("alertButton");
 	
 	public void acceptWebAlert() throws Exception{
-		click(alertButton, "Click Button to see alert");
+		click(alertButton, "ClickButtontoseealert");
 		System.out.println("I'm in AlertsPage.acceptWebAlert()");
 		acceptAlert();
 	} 
 	public void dismissWebAlert() throws Exception{
-		click(alertButton, "Click Button to see alert");
+		click(alertButton, "ClickButtontoseealert");
 		System.out.println("I'm in AlertsPage.dismissWebAlert()");
 		dismissAlert();
 }
