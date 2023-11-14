@@ -5,7 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Function;
@@ -19,7 +18,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -36,14 +34,6 @@ public class ActionEngine extends BaseTest{
 		return we;
 	}
 	
-	public String getText(By locator) throws Exception {
-		String text = "";
-		WebElement we = getWebElement(locator);
-		text = we.getText();
-		return text;
-		
-	}
-	
 	public void click(By locator, String locatorName) throws Exception {
 		boolean flag = false;
 		try {
@@ -58,7 +48,6 @@ public class ActionEngine extends BaseTest{
 			e.printStackTrace();
 			flag = false;
 		} finally {
-			System.out.println("Success...");
 			if(flag) {
 				extentTest.log(LogStatus.PASS, "Succefully clicked on "+locatorName);
 			}else {
@@ -222,61 +211,6 @@ public class ActionEngine extends BaseTest{
 		
 		return screenShotLocation;
 		
-	}
-	
-	public void doubleClick(By locator, String locatorName) throws Exception{
-		boolean flag = false;
-		try {
-			
-			Actions actions = new Actions(driver);
-			actions.doubleClick().perform();
-			flag =true;
-		}catch(Exception e) {
-			e.printStackTrace();
-			flag =false;
-		}finally {
-			if (flag) {
-			} else {
-			}
-		}
-		}
-	public void drgAndDrop(By locator, String locatorName) throws Exception {
-		boolean flag = false;
-		try {
-			Actions act = new Actions(driver);
-			WebElement draggableObject = getWebElement(locator);
-			//WebElement draggableObject = driver.findElement(locator);
-			//act.dragAndDrop( locator, locatorName).perform();
-			flag =true;
-		}catch(Exception e) {
-			e.printStackTrace();
-			flag =false;
-		}finally {
-			if (flag) {
-			} else {
-		}
-	}
-	}
-	
-	public void switchToWindow(int windowIndex) throws Exception{
-		boolean flag = false;
-		try {
-			System.out.println("I'm in switchToWindow().......!");
-			ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-			System.out.println(tabs.size());
-			if(windowIndex < tabs.size()) {
-				driver.switchTo().window(tabs.get(windowIndex));
-			}
-			
-			flag =true;
-		}catch(Exception e) {
-			e.printStackTrace();
-			flag =false;
-		}finally {
-			if (flag) {
-			} else {
-			}
-		}
 	}
 	
 }
