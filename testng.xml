@@ -4,7 +4,7 @@
 	<test name="Nopackage">
 	<parameter name="browserType" value="chrome"></parameter>
 		<classes>
-			<class name="com.automation.tests.WindowsTest" />
+			<class name="com.automation.tests.AlertsTest" />
 		</classes>
 	</test>
 </suite>
