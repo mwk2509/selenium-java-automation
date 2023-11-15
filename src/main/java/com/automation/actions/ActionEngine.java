@@ -264,4 +264,22 @@ public class ActionEngine extends BaseTest{
 		}
 	}
 	
+	
+	public void switchToFrame(String frameId) throws Exception{
+		boolean flag = false;
+		try {
+			System.out.println("I'm in switchToFrame.......!");
+			driver.switchTo().frame(frameId);
+			
+			flag =true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			flag =false;
+		}finally {
+			if (flag) {
+			} else {
+			}
+		}
+	}
+	
 }
