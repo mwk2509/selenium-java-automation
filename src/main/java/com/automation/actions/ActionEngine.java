@@ -282,4 +282,28 @@ public class ActionEngine extends BaseTest{
 		}
 	}
 	
+	public void tableData(By table, By body, By rows, By colomns) throws Exception{
+		try {
+			WebElement tbl = getWebElement(table);
+			WebElement tbody = tbl.findElement(body);
+			String data = "";
+			List<WebElement> trs = tbody.findElements(rows);
+			System.out.println("Number of rows:: "+trs.size());
+			for(WebElement tr : trs) {
+				List<WebElement> tds = tr.findElements(colomns);
+				System.out.println("Number of cols:: "+tds.size());
+				for(WebElement td: tds) {
+					 data = td.getText();
+					
+				}
+				
+				System.out.println(data+" ");
+			}
+ 			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+		}
+	}
+	
 }
